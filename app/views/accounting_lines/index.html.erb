@@ -1,0 +1,38 @@
+<div data-controller="datatable">
+    <%= form_with url: accounting_lines_path, method: :get, remote: true do |f| %>
+        <%= f.text_field :account_number, data: {action: "keyup->datatable#submitWithDebounce"} %>
+        <%= f.text_field :description, data: {action: "keyup->datatable#submitWithDebounce"} %>
+        <%= f.select :limit, [10, 50, 100], {}, {data: {action: "change->datatable#submit"}}  %>
+        <%= f.hidden_field :order, data: {datatable_target: "order"} %>
+        <%= f.submit style: "visibility: hidden", data: {datatable_target: "submit"} %>
+    <% end %>
+    <table>
+      <thead>
+        <tr>
+          <th data-header="account_number">
+            Account Number
+            <button class="sort-btn sort-enabled" data-action="click->datatable#sort"><i class="fas fa-caret-up"></i></button>
+          </th>
+          <th data-header="description">
+            Description
+            <button class="sort-btn" data-action="click->datatable#sort"><i class="fas fa-caret-up"></i></button>
+          </th>
+          <th data-header="mapping">
+            Mapping
+            <button class="sort-btn" data-action="click->datatable#sort"><i class="fas fa-caret-up"></i></button>
+          </th>
+          <th data-header="debit">
+            Debit
+            <button class="sort-btn" data-action="click->datatable#sort"><i class="fas fa-caret-up"></i></button>
+          </th>
+          <th data-header="credit">
+            Credit
+            <button class="sort-btn" data-action="click->datatable#sort"><i class="fas fa-caret-up"></i></button>
+          </th>
+        </tr>
+      </thead>
+      <tbody id="accounting_lines">
+          <%= render 'accounting_lines', accounting_lines: @accounting_lines %>
+      </tbody>
+    </table>
+</div>

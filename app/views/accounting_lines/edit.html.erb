@@ -1,0 +1,6 @@
+<%= turbo_frame_tag "edit_accounting_line_#{@accounting_line.id}" do %>
+  <%= form_with model: @accounting_line do |f| %>
+    <%= f.text_field :description %>
+    <%= f.submit 'v' %>
+  <% end %>
+<% end %>

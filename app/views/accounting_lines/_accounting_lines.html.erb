@@ -1,0 +1,11 @@
+<% @accounting_lines.each do |accounting_line| %>
+  <tr>
+    <td><%= accounting_line.account_number %></td>
+    <td>
+      <%= turbo_frame_tag "edit_accounting_line_#{accounting_line.id}", src: edit_accounting_line_path(accounting_line) %>
+    </td>
+    <td><%= accounting_line.aggregate.name %></td>
+    <td><%= accounting_line.debit %></td>
+    <td><%= accounting_line.credit %></td>
+  </tr>
+<% end %>
